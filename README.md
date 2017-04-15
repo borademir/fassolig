@@ -15,5 +15,13 @@ passo.com.tr adresine girip ilgili etkinliğin bilet satış sayfasına geçip ,
 
 sonrasında da console üzerinde koşan bu yazılıma bir arayüz çakalım da arada bızıklarız kafasıyla devam edip burada yayınlıyoruz. aktifbank yazılımcıları rest servislerinin dışardan tüketilememesi için alengirli işlere girmediği sürece bu alet durmaz ve çalışır .
 
+mvn jetty:run ile localde koşturabilirsiniz.
+
+kendi vps imde koşan haline de aşağıdan .
+
+http://fassolig.bveyaa.com/
+
+makarasına yaptık başımıza iş çıkarmayın passocular :) 
+
 
 
