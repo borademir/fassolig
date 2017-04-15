@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Kahrolsun Fa$$olig!!!</title>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAufEyvvWoevBVKrKsVqaGJ6bQwhG2SHxs" type="text/javascript"></script>
+	<style type="text/css">
+		.ui-widget, .ui-widget .ui-widget {
+	    	font-size: 90%;
+		}
+		
+		.ui-panelgrid .ui-panelgrid-cell {
+    		border-width: 0px;
+    		padding: 0px 1px;
+		}
+		.blockView {
+    		border-width: 0px;
+    		padding: 0px 1px;
+    	}
+		.blockView{
+		    border: 0px solid #aaaaaa;
+		}
+		
+		.blockView tr {
+		 	border: 0px solid #aaaaaa;
+		}
+		.blockView td {
+		 	border: 0px solid #aaaaaa;
+		}
+	</style>
+	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-88115036-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+</h:head>
+
+<h:body>
+	<h:form id="passoForm">
+		<h:graphicImage name="/images/fassolig-logo.jpg" width="100%" />
+		<p:panel id="rootHeader">
+			<f:facet name="header">
+				<h:panelGroup>
+	            	<p:commandButton icon="fa fa-home" value="Tüm Satışları Göster" title="Tüm Liste İçin Tıklayınız.." action="#{fixtureBean.homeAction}" update=":passoForm:rootHeader"></p:commandButton>
+	            	<p:button href="https://twitter.com/qlluq" title="Destek olmak için twitterda takip edebilirsiniz." icon="fa fa-twitter" target="_blank"></p:button>
+	            </h:panelGroup>
+	        </f:facet>
+			<h:panelGrid columns="2" cellpadding="4" rendered="false">
+				<h:outputText value="First Name: " />
+				<p:inputText value="#{helloWorld.firstName}" />
+
+				<h:outputText value="Last Name: " />
+				<p:inputText value="#{helloWorld.lastName}" />
+
+				<p:commandButton value="Submit" update="greeting"
+					oncomplete="PF('greetingDialog').show()" />
+			</h:panelGrid>
+			<p:separator style="height:10px;background:none;"  />
+		    <p:repeat value="#{fixtureBean.allFixtureList}" var="fixture" >
+		    	<h:panelGrid columns="1">
+			        <p:dataTable value="#{fixtureBean.getFixtureDetail(fixture.id).products}" var="product" id="productsDatatable" emptyMessage="Etkinliğe ait tribun blokları getirilemedi.">
+						<f:facet name="header">
+							<h:panelGroup style="text-align: left;">
+				            	#{fixture.name}, #{fixture.venueName}
+				            	
+				            	<p:commandButton icon="fa fa-soccer-ball-o" title="Etkinlik sayfası için tıklayınız" action="#{fixtureBean.gotoFixture(fixture.id)}"></p:commandButton>
+				            	
+				            	<p:commandButton icon="fa fa-dollar" iconPos="right"  value="Stad Doluluk Oranı" title="Stad doluluk oranını hesapla(biraz zaman alabilir,lütfen bekleyiniz.)" action="#{fixtureBean.calculateStaduiumOcupancy}" update=":passoForm:staduiumOcupancy">
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton icon="fa fa-calculator" iconPos="right"  value="Boş Koltuk Var Mı?" title="Boş koltukların olduğu blokları listele" action="#{fixtureBean.showEmptyBlocks}" update=":passoForm:emptyBlocks">
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton icon="fa fa-info-circle" iconPos="right"  value="Açıklamalar" title="Etkinlik açıklamaları için tıklayınız" oncomplete="PF('fixtureDescDialog').show()" update=":passoForm:pgFixtureDesc">
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton icon="fa fa-location-arrow" iconPos="right"  value="Stad Nerede?" title="Konum için tıklayınız..." oncomplete="PF('fixtureLocDialog').show()" update=":passoForm:pgFixtureLocation" disabled="#{fixtureBean.getFixtureDetail(fixture.id).latitude eq 0}">
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+	
+				            	<p:commandButton icon="fa fa-ticket" iconPos="right"  value="Kısıtlamalar" title="Kısıtlamalar için tıklayınız" oncomplete="PF('pgPriorSalesDialog').show()" update=":passoForm:pgPriorSales">
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+				            	
+				            	<p:commandButton icon="fa fa-street-view" iconPos="right" value="Oturma Planı" oncomplete="PF('stadiumImageDialog').show()" update=":passoForm:stadiumImage" title="Stadyum görünümü için tıklayınız.." >
+				            		<f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				            	</p:commandButton>
+				            	
+							</h:panelGroup>
+				        </f:facet>
+					    <p:column headerText="Tribün">
+					        <h:outputText value="#{product.name}" />
+					    </p:column>
+					    <p:column headerText="Açıklama" rendered="false">
+					        <h:outputText value="#{product.description}" />
+					    </p:column>
+					    <p:column headerText="Kapasite" rendered="false">
+					        <h:outputText value="#{product.capacity}" />
+					    </p:column>
+					    <p:column headerText="Fiyat Aralığı">
+					        <h:outputText value="#{product.minPrice} TL - #{product.maxPrice} TL" />
+					    </p:column>
+					    
+				        <p:column style="width:160px;text-align: center">
+				             <p:commandButton icon="ui-icon-search" iconPos="right" value="Tüm Blokları Göster" title="Blokları Göster" action="#{fixtureBean.showBlocksOfFixtureProduct}" oncomplete="PF('blocksDialog').show()" update=":passoForm:pgBlocks">
+				                <f:setPropertyActionListener value="#{fixture}" target="#{fixtureBean.selectedFixture}" />
+				                <f:setPropertyActionListener value="#{product}" target="#{fixtureBean.selectedProduct}" />
+				            </p:commandButton>
+				        </p:column>
+					    
+					</p:dataTable>
+					<p:separator style="height:10px;background:none;"  />
+				</h:panelGrid>
+    		</p:repeat>
+		</p:panel>
+
+		<p:dialog id="pgBlocks" header="#{fixtureBean.selectedFixture.name} / #{fixtureBean.selectedProduct.name}" widgetVar="blocksDialog" modal="true"	resizable="false" width="600" closeOnEscape="true" showEffect="slide" hideEffect="blind">
+			<p:dataTable  value="#{fixtureBean.selectedProductBlockList}" var="block" emptyMessage="Blok verisi bulunamadı" id="productsDatatable" scrollable="true" scrollHeight="250">
+			    <p:column headerText="Blok İsmi">
+			        <h:outputText value="#{block.name}" />
+			    </p:column>
+			    <p:column headerText="Boş Koltuk Sayısı" rendered="">
+			        <h:outputText value="#{block.available}" />
+			    </p:column>
+		        <p:column style="width:170px;text-align: center">
+		             <p:commandButton icon="ui-icon-search" iconPos="right" value="Blok Yoğunluk Durumu" title="Oturma Planını Göster" action="#{fixtureBean.showBlockClasses}" 
+		             		oncomplete="PF('blockClassesDialog').show()" update=":passoForm:pgBlockClasses">
+		                <f:setPropertyActionListener value="#{block}" target="#{fixtureBean.selectedProductBlock}" />
+		            </p:commandButton>
+		        </p:column>
+			</p:dataTable>
+		</p:dialog>
+		
+		<p:dialog id="emptyBlocks" header="#{fixtureBean.selectedFixture.name}" widgetVar="emptyBlocksDialog" modal="true"	resizable="false" width="600" closeOnEscape="true" showEffect="slide" hideEffect="blind">
+			<p:dataTable  value="#{fixtureBean.emptyBlockList}" var="emptyBlock" emptyMessage="Boş koltuk bulunamadı.." scrollable="true" scrollHeight="250">
+			    <p:column headerText="Blok">
+			        <h:outputText value="#{emptyBlock}" />
+			    </p:column>
+			</p:dataTable>
+		</p:dialog>
+		
+		<p:dialog id="pgBlockClasses" header="#{fixtureBean.selectedFixture.name} / #{fixtureBean.selectedProduct.name} / #{fixtureBean.selectedProductBlock.name}" closeOnEscape="true" 
+			widgetVar="blockClassesDialog" modal="true"	resizable="false" position="center center" showEffect="slide" hideEffect="blind">
+			<p:panelGrid styleClass="blockView">
+				<p:repeat value="#{fixtureBean.selectedBlockClasses}" var="classes1" >
+					<p:row>
+					    <p:repeat value="#{classes1}" var="classes2" >
+						<p:column><h:graphicImage rendered="#{classes2 != 0}" name="/images/#{classes2 == 3 ? 'available.jpg' : 'in-use.jpg'}" /></p:column>
+						</p:repeat>
+					</p:row>
+				</p:repeat>
+			</p:panelGrid>
+			<p:separator style="height:10px;background:none;"  />
+			<h:panelGrid columns="2">
+				<h:graphicImage name="/images/available.jpg" /><h:outputText value="Boş Koltuk"></h:outputText>
+				<h:graphicImage name="/images/in-use.jpg" /><h:outputText value="Dolu Koltuk"></h:outputText>
+			</h:panelGrid>
+		</p:dialog>
+		
+		<p:dialog id="pgFixtureDesc" header="#{fixtureBean.selectedFixture.name}" closeOnEscape="true"  showEffect="slide" hideEffect="blind"
+			widgetVar="fixtureDescDialog" modal="true"	resizable="false" position="center center" width="900">
+			<h:outputText value="#{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).description}" escape="false"></h:outputText>
+		</p:dialog>	
+		
+		<p:dialog id="pgFixtureLocation" header="#{fixtureBean.selectedFixture.name} ##{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).latitude}, #{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).longitude}" closeOnEscape="true" 
+			widgetVar="fixtureLocDialog" modal="true"	resizable="false" position="center center" width="900" showEffect="slide" hideEffect="blind">
+			<p:gmap center="#{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).latitude}, #{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).longitude}" zoom="16" type="HYBRID" style="width:100%;height:400px" />
+		</p:dialog>	
+		
+		<p:dialog id="pgPriorSales" header="#{fixtureBean.selectedFixture.name} Satış Kısıtlamaları" closeOnEscape="true" showEffect="slide" hideEffect="blind"
+			widgetVar="pgPriorSalesDialog" modal="true"	resizable="false" position="center center" width="900">
+			<p:dataList type="ordered" value="#{fixtureBean.getFixtureDetail(fixtureBean.selectedFixture.id).prioritySalesProvidersInfo}" var="salesProvider" emptyMessage="Biletler genel satıştadır.">
+				#{salesProvider.info.name}, #{salesProvider.info.caption}
+			</p:dataList>
+		</p:dialog>
+		
+		
+		<p:dialog id="stadiumImage" header="#{fixtureBean.selectedFixture.name} Oturma Planı Detayları" closeOnEscape="true" showEffect="slide" hideEffect="blind"
+			widgetVar="stadiumImageDialog" modal="true"	resizable="false" position="center center" width="900">
+			<center><h:outputText rendered="#{fixtureBean.selectedFixture != null}" value="#{fixtureBean.selectedStadiumImageLocation}" escape="false"></h:outputText> </center>
+		</p:dialog>	
+		
+		<p:dialog id="staduiumOcupancy" header="#{fixtureBean.selectedFixture.name} Stad doluluk oranı" closeOnEscape="true" showEffect="slide" hideEffect="blind"
+			widgetVar="staduiumOcupancyDialog" modal="true"	resizable="false" position="center center" width="900">
+			<p:progressBar id="pbOcupancy" value="#{fixtureBean.ocupancyPercentage}" labelTemplate="Stad %{value} oranında dolu görünmektedir." displayOnly="true" />
+			<h:outputText value="Stadın doluluk oranı SATIŞA ÇIKARILMIŞ bloklar üzerinden hesaplanmaktadır." style="color:red;font-size: xx-small;"></h:outputText>		
+		</p:dialog>
+		
+		
+		
+		
+		<p:growl id="pageGrowl" autoUpdate="true"></p:growl>
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+		 
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="true" width="400" header="İşlemi yapıyorum..biraz bekle..">
+		    <center><p:graphicImage name="/images/drop16.gif" width="50%" height="50%"/></center>
+		</p:dialog>
+
+	</h:form>
+</h:body>
+</html>
