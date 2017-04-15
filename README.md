@@ -21,7 +21,23 @@ kendi vps imde koşan haline de aşağıdan .
 
 http://fassolig.bveyaa.com/
 
-makarasına yaptık başımıza iş çıkarmayın passocular :) 
+makarasına yaptık başımıza iş çıkarmayın passocular :)
+
+
+bazı ekran görüntüleri :
+
+
+![alt tag](https://github.com/borademir/fassolig/blob/master/src/main/webapp/resources/images/wiki-match-detail.PNG)
+
+![alt tag](https://github.com/borademir/fassolig/blob/master/src/main/webapp/resources/images/wiki-capacity.PNG) 
+
+![alt tag](https://github.com/borademir/fassolig/blob/master/src/main/webapp/resources/images/wiki-location.PNG) 
+
+![alt tag](https://github.com/borademir/fassolig/blob/master/src/main/webapp/resources/images/wiki-plan.PNG) 
+
+![alt tag](https://github.com/borademir/fassolig/blob/master/src/main/webapp/resources/images/wiki-seats.PNG) 
+
+ 
 
 
 
